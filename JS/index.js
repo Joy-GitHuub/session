@@ -1,3 +1,4 @@
+// ALL ID Tag
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('search-btn');
 const errorDiv = document.getElementById('error');
@@ -5,10 +6,12 @@ const countryContainer = document.getElementById('country-container')
 const countryDetails = document.getElementById('country-details');
 const spinner = document.getElementById('spinner');
 
+// Button Event Listener
 searchBtn.addEventListener('click', function () {
   const search = searchInput.value;
   console.log(search);
 
+  // Empty
   if (search === "") {
     alert("No Input is Hare")
     errorDiv.innerHTML = `
@@ -16,11 +19,16 @@ searchBtn.addEventListener('click', function () {
     `
     return;
   }
+  // All Country API
   countryDetails.innerHTML = "";
+
+  // Spinner Remove D-NONE
   spinner.classList.remove("d-none");
   fetch(`https://restcountries.eu/rest/v2/name/${search}`)
     .then(res => res.json())
     .then(data => showData(data));
+
+  // Spinner Timer
   setTimeout(() => {
     spinner.classList.add("d-none");
     showData(data);
